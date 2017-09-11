@@ -25,13 +25,13 @@ def hello():
     return resp
 
 
-@app.route("/note_api/notes", methods=["GET"])
+@app.route("/api/note/notes", methods=["GET"])
 def note_get():
     note_title = request.args.get("note_title")
     return jsonify(note_model.get_note(note_title))
 
 
-@app.route("/note_api/notes", methods=["POST"])
+@app.route("/api/note/notes", methods=["POST"])
 def note_post():
     post_data = request.json
     return_msg = note_model.save_note(post_data)
@@ -39,9 +39,17 @@ def note_post():
     return jsonify(resp_data)
 
 
-@app.route("/note_api/notes", methods=["PUT"])
+@app.route("/api/note/notes", methods=["PUT"])
 def note_put():
     put_data = request.json
     return_msg = note_model.update_note(put_data)
+    resp_data = {"status": return_msg}
+    return jsonify(resp_data)
+
+
+@app.route("/api/note/notes", methods=["DELETE"])
+def note_delete():
+    note_title = request.args.get("note_title")
+    return_msg = note_model.delete_note(note_title)
     resp_data = {"status": return_msg}
     return jsonify(resp_data)
