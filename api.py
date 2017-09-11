@@ -29,3 +29,10 @@ def hello():
 def note_get():
     note_title = request.args.get("note_title")
     return jsonify(note_model.get_note(note_title))
+
+@app.route("/notes", methods=["POST"])
+def note_post():
+    post_data = request.json
+    return_msg = note_model.save_note(post_data)
+    resp_data = {"status": return_msg}
+    return jsonify(resp_data)
