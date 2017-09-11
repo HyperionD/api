@@ -36,8 +36,7 @@ class NoteLabel(BaseModel):
 
 def init_db():
     db.connect()
-    for note in Note.select():
-        print(note.content)
+    print(search("tes"))
     db.close()
 
 
@@ -188,6 +187,15 @@ def save_notelabel(note_id, label_id):
         notelabel.save()
         return_msg = "保存笔记标签成功"
     return return_msg
+
+
+def search(str):
+    search_result = []
+    result = Note.select().where(Note.content.contains(str))
+    for note in result:
+        note_dict = {"note_title": note.title, "note_content": note.content}
+        search_result.append(note_dict)
+    return search_result
 
 
 if __name__ == '__main__':
