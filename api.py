@@ -37,3 +37,11 @@ def note_post():
     return_msg = note_model.save_note(post_data)
     resp_data = {"status": return_msg}
     return jsonify(resp_data)
+
+
+@app.route("/note_api/notes", methods=["PUT"])
+def note_put():
+    put_data = request.json
+    return_msg = note_model.update_note(put_data)
+    resp_data = {"status": return_msg}
+    return jsonify(resp_data)
