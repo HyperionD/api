@@ -15,7 +15,7 @@ def __db_connect():
 
 @app.teardown_request
 def _db_close(exc):
-    if not db.is_closed():
+    if not note_model.db.is_closed():
         note_model.db.close()
 
 
