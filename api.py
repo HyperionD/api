@@ -53,3 +53,33 @@ def note_delete():
     return_msg = note_model.delete_note(note_title)
     resp_data = {"status": return_msg}
     return jsonify(resp_data)
+
+
+@app.route("/api/note/labels", methods=["GET"])
+def labels_get():
+    note_title = request.args.get("note_title")
+    if note_title is None:
+        return jsonify(note_model.get_all_labels())
+    else:
+        return jsonify(note_model.get_labels(note_title))
+
+
+@app.route("/api/note/labels", methods=["POST"])
+def labels_post():
+    post_data = request.json
+    return_msg = note_model.save_label(post_data)
+    resp_data = {"status": return_msg}
+    return jsonify(resp_data)
+
+
+@app.route("/api/note/labels", methods=["DELETE"])
+def labels_delete():
+    label_name = request.args.get("label_name")
+    return_msg = note_model.delete_label(label_name)
+    resp_data = {"status": return_msg}
+    return jsonify(resp_data)
+
+
+@app.route("/api/note/menus", methods=["GET"])
+def menus_get():
+    return jsonify(note_model.get_menu())

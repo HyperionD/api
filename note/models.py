@@ -188,6 +188,10 @@ def save_notelabel(note_id, label_id):
         return_msg = "保存笔记标签成功"
     return return_msg
 
+"""
+Search
+"""
+
 
 def search(str):
     search_result = []
