@@ -25,7 +25,6 @@ class Note(BaseModel):
 class Label(BaseModel):
     id = PrimaryKeyField()
     name = CharField()
-    parent_id = IntegerField()
 
 
 class NoteLabel(BaseModel):
