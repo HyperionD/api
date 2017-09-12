@@ -25,13 +25,13 @@ def hello():
     return resp
 
 
-@app.route("/api/note/notes", methods=["GET"])
+@app.route("/api/marknote/notes", methods=["GET"])
 def note_get():
     note_title = request.args.get("note_title")
     return jsonify(note_model.get_note(note_title))
 
 
-@app.route("/api/note/notes", methods=["POST"])
+@app.route("/api/marknote/notes", methods=["POST"])
 def note_post():
     post_data = request.json
     return_msg = note_model.save_note(post_data)
@@ -39,7 +39,7 @@ def note_post():
     return jsonify(resp_data)
 
 
-@app.route("/api/note/notes", methods=["PUT"])
+@app.route("/api/marknote/notes", methods=["PUT"])
 def note_put():
     put_data = request.json
     return_msg = note_model.update_note(put_data)
@@ -47,7 +47,7 @@ def note_put():
     return jsonify(resp_data)
 
 
-@app.route("/api/note/notes", methods=["DELETE"])
+@app.route("/api/marknote/notes", methods=["DELETE"])
 def note_delete():
     note_title = request.args.get("note_title")
     return_msg = note_model.delete_note(note_title)
@@ -55,7 +55,7 @@ def note_delete():
     return jsonify(resp_data)
 
 
-@app.route("/api/note/labels", methods=["GET"])
+@app.route("/api/marknote/labels", methods=["GET"])
 def labels_get():
     note_title = request.args.get("note_title")
     if note_title is None:
@@ -64,7 +64,7 @@ def labels_get():
         return jsonify(note_model.get_labels(note_title))
 
 
-@app.route("/api/note/labels", methods=["POST"])
+@app.route("/api/marknote/labels", methods=["POST"])
 def labels_post():
     post_data = request.json
     return_msg = note_model.save_label(post_data)
@@ -72,7 +72,13 @@ def labels_post():
     return jsonify(resp_data)
 
 
-@app.route("/api/note/labels", methods=["DELETE"])
+@app.route("/api/marknote/labels", methods=["PUT"])
+def label_update():
+    put_data = request.json
+    return jsonify(note_model.update_label(put_data))
+
+
+@app.route("/api/marknote/labels", methods=["DELETE"])
 def labels_delete():
     label_name = request.args.get("label_name")
     return_msg = note_model.delete_label(label_name)
@@ -80,11 +86,11 @@ def labels_delete():
     return jsonify(resp_data)
 
 
-@app.route("/api/note/menus", methods=["GET"])
+@app.route("/api/marknote/menus", methods=["GET"])
 def menus_get():
     return jsonify(note_model.get_menu())
 
-@app.route("/api/note/search", methods=["GET"])
+@app.route("/api/marknote/search", methods=["GET"])
 def search_note():
     search_str = request.args.get("search_str")
     return jsonify(note_model.search(search_str))

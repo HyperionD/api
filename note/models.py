@@ -142,6 +142,22 @@ def save_label(data):
     return return_msg
 
 
+def update_label(data):
+    label_name = data["label_name"]
+    to_change = data["to_change"]
+    try:
+        label = Label.get(Label.name == label_name)
+        if label_name == to_change:
+            return_msg = "更改内容与原标签相同"
+        else:
+            label.name = to_change
+            label.save()
+            return_msg = "更新标签成功"
+    except DoesNotExist:
+        return_msg = "标签：{}不存在".format(label_name)
+    return return_msg
+
+
 def delete_label(label_name):
     try:
         label = Label.get(Label.name == label_name)
