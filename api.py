@@ -83,3 +83,4 @@ def labels_delete():
 @app.route("/api/note/menus", methods=["GET"])
 def menus_get():
     return jsonify(note_model.get_menu())
+

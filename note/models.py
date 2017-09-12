@@ -166,7 +166,7 @@ def get_menu():
             note = Note.get(Note.id == note_label.note_id)
             menu_data[label.name]["notes"].append(note.title)
 
-    result = db.execute_sql("select * from note left outer join notelabel on notelabel.note_id == note.id where notelabel.note_id is null")
+    result = db.execute_sql("select * from note left outer join notelabel on notelabel.note_id = note.id where notelabel.note_id is null")
     for note_without_label in result:
         menu_data["未分类"]["notes"].append(note_without_label[1])
     return menu_data
