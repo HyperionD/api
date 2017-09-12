@@ -174,17 +174,19 @@ def delete_label(label_name):
 
 
 def get_menu():
-    menu_data = {}
-    menu_data["未分类"] = {"open": False, "notes": []}
+    menu_data = []
     for label in Label.select():
-        menu_data[label.name] = {"open": False, "notes": []}
+        menu_label_dict = {"name": label.name, "notes": [], "open": False}
         for note_label in NoteLabel.select().where(NoteLabel.label_id == label.id):
             note = Note.get(Note.id == note_label.note_id)
-            menu_data[label.name]["notes"].append(note.title)
+            menu_label_dict["note"].append(note.title)
+        menu_data.append(menu_label_dict)
 
     result = db.execute_sql("select * from note left outer join notelabel on notelabel.note_id = note.id where notelabel.note_id is null")
+    menu_without_label = {"name": "未分类", "notes": [], "open": False}
     for note_without_label in result:
-        menu_data["未分类"]["notes"].append(note_without_label[1])
+        menu_without_label["notes"].append(note_without_label[1])
+    menu_data.append(menu_without_label)
     return menu_data
 
 
