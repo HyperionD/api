@@ -179,7 +179,7 @@ def get_menu():
         menu_label_dict = {"name": label.name, "notes": [], "open": False}
         for note_label in NoteLabel.select().where(NoteLabel.label_id == label.id):
             note = Note.get(Note.id == note_label.note_id)
-            menu_label_dict["note"].append(note.title)
+            menu_label_dict["notes"].append(note.title)
         menu_data.append(menu_label_dict)
 
     result = db.execute_sql("select * from note left outer join notelabel on notelabel.note_id = note.id where notelabel.note_id is null")
