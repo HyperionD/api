@@ -84,3 +84,7 @@ def labels_delete():
 def menus_get():
     return jsonify(note_model.get_menu())
 
+@app.route("/api/note/search", methods=["GET"])
+def search_note():
+    search_str = request.args.get("search_str")
+    return jsonify(note_model.search(search_str))
