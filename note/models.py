@@ -45,12 +45,14 @@ Note
 
 
 def get_note(note_title):
+    note_dict = {"content": "", datetime: ""}
     try:
         note = Note.get(Note.title == note_title)
-        note_dict = {"content": note.content, "datetime": note.datetime}
-        return note_dict
+        note_dict["content"] = note.content
+        note_dict["datetime"] = note.datetime
     except DoesNotExist:
-        return None
+        pass
+    return note_dict
 
 
 def save_note(data):
