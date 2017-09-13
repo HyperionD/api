@@ -45,7 +45,7 @@ Note
 
 
 def get_note(note_title):
-    note_dict = {"content": "", datetime: ""}
+    note_dict = {"content": "", "datetime": ""}
     try:
         note = Note.get(Note.title == note_title)
         note_dict["content"] = note.content
