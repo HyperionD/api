@@ -28,7 +28,10 @@ def hello():
 @app.route("/api/marknote/notes", methods=["GET"])
 def note_get():
     note_title = request.args.get("note_title")
-    return jsonify(note_model.get_note(note_title))
+    note_dict = note_model.get_note(note_title)
+    note_label = note_model.get_labels(note_title)
+    note_dict["labels"] = note_label
+    return jsonify(note_dict)
 
 
 @app.route("/api/marknote/notes", methods=["POST"])
