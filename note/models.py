@@ -142,7 +142,7 @@ def save_label(data):
             except DoesNotExist:
                 return_msg += "笔记: {} 不存在".format(note_title)
         else:
-            return_msg += ""
+            return_msg = None
     return return_msg
 
 
