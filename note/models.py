@@ -134,13 +134,13 @@ def save_label(data):
             label = Label(name=label_name)
             label.save()
             return_msg += "标签保存成功， "
-    try:
-        note_id = Note.get(Note.title == note_title).id
-        label_id = Label.get(Label.name == label_name).id
-        note_label_return = save_notelabel(note_id, label_id)
-        return_msg += note_label_return
-    except DoesNotExist:
-        return_msg += "笔记: {} 不存在".format(note_title)
+        try:
+            note_id = Note.get(Note.title == note_title).id
+            label_id = Label.get(Label.name == label_name).id
+            note_label_return = save_notelabel(note_id, label_id)
+            return_msg += note_label_return
+        except DoesNotExist:
+            return_msg += "笔记: {} 不存在".format(note_title)
     return return_msg
 
 
