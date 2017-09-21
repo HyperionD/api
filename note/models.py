@@ -130,9 +130,12 @@ def save_label(data):
         Label.get(Label.name == label_name)
         return_msg += "标签已存在， "
     except DoesNotExist:
-        label = Label(name=label_name)
-        label.save()
-        return_msg += "标签保存成功， "
+        if label_name != "":
+            label = Label(name=label_name)
+            label.save()
+            return_msg += "标签保存成功， "
+        else:
+            return_msg += "标签不能为空， "
 
     try:
         note_id = Note.get(Note.title == note_title).id
