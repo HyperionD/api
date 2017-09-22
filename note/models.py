@@ -198,13 +198,15 @@ NoteLabel
 
 
 def save_notelabel(note_id, label_id):
+    note_title = Note.get(Note.id == note_id).title
+    label_name = Label.get(Lable.id == label_id).name
     try:
         NoteLabel.get(NoteLabel.note_id == note_id, NoteLabel.label_id == label_id)
         return_msg = "笔记标签已存在"
     except DoesNotExist:
         notelabel = NoteLabel(note_id=note_id, label_id=label_id)
         notelabel.save()
-        return_msg = "保存笔记标签成功"
+        return_msg = "标签{}已关联笔记{}".format(label_name, note_title)
     return return_msg
 
 """
