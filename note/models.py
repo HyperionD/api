@@ -60,9 +60,12 @@ def save_note(data):
         Note.get(Note.title == data["title"])
         return_msg = update_note(data)
     except DoesNotExist:
-        note = Note(title=data["title"], content=data["content"], datetime=data["datetime"])
-        note.save()
-        return_msg = "保存笔记成功"
+        if data["title"] != "":
+            note = Note(title=data["title"], content=data["content"], datetime=data["datetime"])
+            note.save()
+            return_msg = "保存笔记成功"
+        else:
+            return_msg = "标题不能为空"
     return return_msg
 
 
