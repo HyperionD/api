@@ -129,7 +129,6 @@ def save_label(data):
     if label_name != "":
         try:
             Label.get(Label.name == label_name)
-            return_msg += "标签已存在， "
         except DoesNotExist:
             label = Label(name=label_name)
             label.save()
@@ -202,7 +201,7 @@ def save_notelabel(note_id, label_id):
     label_name = Label.get(Label.id == label_id).name
     try:
         NoteLabel.get(NoteLabel.note_id == note_id, NoteLabel.label_id == label_id)
-        return_msg = "笔记标签已存在"
+        return_msg = "笔记{}已存在标签{}".format(note_title, label_name)
     except DoesNotExist:
         notelabel = NoteLabel(note_id=note_id, label_id=label_id)
         notelabel.save()
