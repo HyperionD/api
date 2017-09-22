@@ -58,8 +58,7 @@ def get_note(note_title):
 def save_note(data):
     try:
         Note.get(Note.title == data["title"])
-        return_msg = "笔记已存在"
-        update_note(data)
+        return_msg = update_note(data)
     except DoesNotExist:
         note = Note(title=data["title"], content=data["content"], datetime=data["datetime"])
         note.save()
