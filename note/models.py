@@ -75,7 +75,7 @@ def update_note(data):
             note_to_update.save()
             return_msg = "更新笔记成功"
         else:
-            return_msg = "笔记内容相同，没有进行更新"
+            return_msg = "笔记内容相同"
     except DoesNotExist:
         return_msg = "笔记不存在"
     return return_msg
