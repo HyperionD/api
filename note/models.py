@@ -199,7 +199,7 @@ NoteLabel
 
 def save_notelabel(note_id, label_id):
     note_title = Note.get(Note.id == note_id).title
-    label_name = Label.get(Lable.id == label_id).name
+    label_name = Label.get(Label.id == label_id).name
     try:
         NoteLabel.get(NoteLabel.note_id == note_id, NoteLabel.label_id == label_id)
         return_msg = "笔记标签已存在"
